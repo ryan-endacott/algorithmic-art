@@ -7,12 +7,15 @@ int SPEED = 1;
 int MAX_AGE = 100;
 float AGE_SPEED = .2;
 
+// Modify this to control how quickly particles rotate around the center of the screen.
+float ROTATION_VALUE = .004;
+
 // Modify this to control how much particles tend to go in a certain direction.
 // Lower numbers make them tend to go more in a certain direction.
 float DIRECTION_FACTOR = 1.5;
 
 // Modify this to change how far the particles spawn from the border of the screen.
-int BORDER = WIDTH / 2;
+int BORDER = WIDTH / 2 ;//- 20;
 
 ArrayList<Particle> particles = new ArrayList<Particle>();
 
@@ -44,8 +47,7 @@ void draw() {
 class Particle {
   float x;
   float y;
-  float velx;
-  float vely;
+  PVector vel;
   float prevx;
   float prevy;
   boolean alive;
@@ -54,8 +56,7 @@ class Particle {
   Particle(float x, float y, float velx, float vely) {
     this.x = x;
     this.y = y;
-    this.velx = velx;
-    this.vely = vely;
+    this.vel = new PVector(velx, vely);
     this.prevx = x;
     this.prevy = y;
     this.alive = true;
@@ -70,9 +71,10 @@ class Particle {
     prevy = y;
     x += random(-SPEED, SPEED);
     y += random(-SPEED, SPEED);
-    x += velx;
-    y += vely;
-    this.age += AGE_SPEED;
+    x += vel.x;
+    y += vel.y;
+    vel.rotate(ROTATION_VALUE);
+    age += AGE_SPEED;
     if (age > MAX_AGE) {
       alive = false;
     }
