@@ -8,11 +8,14 @@ int MAX_AGE = 100;
 float AGE_SPEED = .2;
 
 // Modify this to control how quickly particles rotate around the center of the screen.
-float ROTATION_VALUE = .004;
+float ROTATION_VALUE = .033;
+
+// Controls if particles with a low speed are killed so all particles escape the center.
+float MIN_SPEED = .5;
 
 // Modify this to control how much particles tend to go in a certain direction.
 // Lower numbers make them tend to go more in a certain direction.
-float DIRECTION_FACTOR = 1.5;
+float DIRECTION_FACTOR = .5;
 
 // Modify this to change how far the particles spawn from the border of the screen.
 int BORDER = WIDTH / 2 ;//- 20;
@@ -61,6 +64,9 @@ class Particle {
     this.prevy = y;
     this.alive = true;
     this.age = 0;
+    if (abs(vel.x) < MIN_SPEED && abs(vel.y) < MIN_SPEED) {
+      alive = false;
+    }
   }
 
   void update() {
