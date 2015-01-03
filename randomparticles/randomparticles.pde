@@ -2,23 +2,23 @@
 // Constants
 int WIDTH = 720;
 int HEIGHT = WIDTH;
-int NUM_PARTICLES = 2000;
-float SPEED = .5;
-int MAX_AGE = 100;
+int NUM_PARTICLES = 200;
+float SPEED = 10;
+int MAX_AGE = 1000;
 float AGE_SPEED = .2;
 
 // Modify this to control how quickly particles rotate around the center of the screen.
-float ROTATION_VALUE = .000;
+float ROTATION_VALUE = .015;
 
 // Controls if particles with a low speed are killed so all particles escape the center.
 float MIN_SPEED = 0;
 
 // Modify this to control how much particles tend to go in a certain direction.
 // Lower numbers make them tend to go more in a certain direction.
-float DIRECTION_FACTOR = .5;
+float DIRECTION_FACTOR = 2;
 
 // Modify this to change how far the particles spawn from the border of the screen.
-int BORDER = WIDTH / 2 ;
+int BORDER = WIDTH / 4;
 
 ArrayList<Particle> particles = new ArrayList<Particle>();
 
@@ -45,6 +45,10 @@ void draw() {
     p.update();
     p.display();
   }
+}
+
+void mousePressed() {
+  saveFrame();
 }
 
 class Particle {
