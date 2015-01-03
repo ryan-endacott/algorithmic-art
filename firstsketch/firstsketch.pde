@@ -40,6 +40,10 @@ void draw() {
   iteration++;
 }
 
+void mousePressed() {
+  saveFrame();
+}
+
 class Circle {
   float x;
   float y;
